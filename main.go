@@ -45,7 +45,8 @@ func publish(projectID, topicID, msg string) error {
 	// ID is returned for the published message.
 	id, err := result.Get(ctx)
 	if err != nil {
-		panic(err)
+		//panic(err)
+		fmt.Println(err)
 	}
 	//fmt.Fprintf(w, "Published a message; msg ID: %v\n", id)
 	fmt.Println("Published a message; msg ID: " + id)
@@ -58,7 +59,8 @@ func pullMsgsSync() error {
 	ctx := context.Background()
 	client, err := pubsub.NewClient(ctx, *projectID)
 	if err != nil {
-		panic(err)
+		//panic(err)
+		fmt.Println(err)
 	}
 	defer client.Close()
 
@@ -83,7 +85,8 @@ func pullMsgsSync() error {
 		msg.Ack()
 	})
 	if err != nil {
-		panic(err)
+		//panic(err)
+		fmt.Println(err)
 	}
 	fmt.Println(received)
 

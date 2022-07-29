@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pubsub
+  namespace: default
+  labels:
+    app: pubsub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pubsub
+  template:
+    metadata:
+      labels:
+        app: pubsub
+    spec:
+      containers:
+      - name: pub
+        image: naseemmohammed/pubsub:0.0.1
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: ENV_AUTH_SERVER
+          value: ":8080"
+        - name: ENV_PPSA
+          value: "localhost"
+      imagePullSecrets:
+        - name: topsecret
